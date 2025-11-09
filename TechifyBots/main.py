@@ -3,6 +3,7 @@ from pyrogram import Client, filters
 from asyncio.exceptions import TimeoutError
 from telethon.sessions import StringSession
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
+from .maintenance import get_maintenance
 from pyrogram.errors import (
     ApiIdInvalid,
     PhoneNumberInvalid,
@@ -40,6 +41,9 @@ async def main(_, msg):
     await msg.reply(ask_ques, reply_markup=InlineKeyboardMarkup(buttons_ques))
 
 async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bool = False):
+    if await get_maintenance() and message.from_user.id != ADMIN:
+        await msg.delete()
+        return await msg.reply_text(f"<b>{message.from_user.mention},\n\nᴛʜɪꜱ ʙᴏᴛ ɪꜱ ᴄᴜʀʀᴇɴᴛʟʏ ᴜɴᴅᴇʀ ᴍᴀɪɴᴛᴇɴᴀɴᴄᴇ.\n\n<blockquote>ᴄᴏɴᴛᴀᴄᴛ ᴏᴡɴᴇʀ ꜰᴏʀ ᴍᴏʀᴇ ɪɴꜰᴏ.</blockquote></b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("👨‍💻 ᴏᴡɴᴇʀ 👨‍💻", user_id=int(ADMIN))]]))
     if telethon:
         ty = "𝗧𝗘𝗟𝗘𝗧𝗛𝗢𝗡"
     else:
