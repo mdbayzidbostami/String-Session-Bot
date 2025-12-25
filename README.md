@@ -18,6 +18,7 @@
 - Can Broadcast Message To Users
 - Fully modified repo
 - Maintenance Mode
+- Ban & Unban Feature
 - Deploy To Koyeb + Heroku + Railway.
 - [Developer support](https://telegram.me/TechifySupport) 24x7.
 </details>
@@ -34,7 +35,10 @@
 - `ADMIN` : Your Telegram ID.
 - `PICS` - Your bot start images (you can add multiple images)
 - `LOG_CHANNEL` : Log Channel ID.
-- `AUTH_CHANNELS` : Fsub Channel ID.
+- `IS_FSUB` : True/False FSUB accordingly.
+- `FSUB_EXPIRE` : Your FSUB link expire time.
+- `AUTH_CHANNELS` : Your Public & Private FSUB channels IDs.
+- `AUTH_REQ_CHANNELS` : Your Private Request FSUB channels IDs.
 
 </details>
 
