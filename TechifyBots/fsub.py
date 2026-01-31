@@ -6,6 +6,7 @@ from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, 
 from pyrogram.errors import UserNotParticipant, ChatAdminRequired
 from config import AUTH_CHANNELS, AUTH_REQ_CHANNELS, ADMIN, FSUB_EXPIRE, DB_URI, DB_NAME, IS_FSUB
 
+
 class TechifyBots:
     def __init__(self):
         client = AsyncIOMotorClient(DB_URI)
@@ -13,7 +14,14 @@ class TechifyBots:
         self.join_requests = db["join_requests"]
 
     async def add_join_req(self, user_id: int, channel_id: int):
-        await self.join_requests.update_one({"user_id": user_id}, {"$addToSet": {"channels": channel_id}, "$set": {"created_at": datetime.datetime.utcnow()}}, upsert=True)
+        await self.join_requests.update_one(
+            {"user_id": user_id},
+            {
+                "$addToSet": {"channels": channel_id},
+                "$set": {"created_at": datetime.datetime.utcnow()}
+            },
+            upsert=True
+        )
 
     async def has_joined_channel(self, user_id: int, channel_id: int) -> bool:
         doc = await self.join_requests.find_one({"user_id": user_id})
@@ -22,16 +30,20 @@ class TechifyBots:
     async def del_join_req(self):
         await self.join_requests.drop()
 
+
 tb = TechifyBots()
+
 
 @Client.on_chat_join_request(filters.chat(AUTH_REQ_CHANNELS))
 async def join_reqs(client: Client, message: ChatJoinRequest):
     await tb.add_join_req(message.from_user.id, message.chat.id)
 
+
 @Client.on_message(filters.command("delreq") & filters.private & filters.user(ADMIN))
 async def del_requests(client: Client, message: Message):
     await tb.del_join_req()
-    await message.reply("**⚙ Successfully join request cache deleted.**")
+    await message.reply("Join request cache deleted successfully.")
+
 
 async def is_subscribed(bot: Client, user_id: int, expire_at):
     missing = []
@@ -41,15 +53,19 @@ async def is_subscribed(bot: Client, user_id: int, expire_at):
         except UserNotParticipant:
             try:
                 chat = await bot.get_chat(channel_id)
-                invite = await bot.create_chat_invite_link(channel_id, expire_date=expire_at)
+                invite = await bot.create_chat_invite_link(
+                    channel_id,
+                    expire_date=expire_at
+                )
                 missing.append((chat.title, invite.invite_link))
             except ChatAdminRequired:
-                logging.error(f"Bot not admin in auth channel {channel_id}")
+                logging.error(f"Bot is not admin in auth channel {channel_id}")
             except Exception:
                 pass
         except Exception:
             pass
     return missing
+
 
 async def is_req_subscribed(bot: Client, user_id: int):
     missing = []
@@ -58,42 +74,82 @@ async def is_req_subscribed(bot: Client, user_id: int):
             continue
         try:
             chat = await bot.get_chat(channel_id)
-            invite = await bot.create_chat_invite_link(channel_id, creates_join_request=True)
+            invite = await bot.create_chat_invite_link(
+                channel_id,
+                creates_join_request=True
+            )
             missing.append((chat.title, invite.invite_link))
         except ChatAdminRequired:
-            logging.error(f"Bot not admin in request channel {channel_id}")
+            logging.error(f"Bot is not admin in request channel {channel_id}")
         except Exception:
             pass
     return missing
 
+
 async def get_fsub(bot: Client, message: Message) -> bool:
     user_id = message.from_user.id
+
     if user_id == ADMIN:
         return True
-    expire_at = datetime.datetime.utcnow() + datetime.timedelta(minutes=FSUB_EXPIRE) if FSUB_EXPIRE > 0 else None
+
+    expire_at = (
+        datetime.datetime.utcnow() + datetime.timedelta(minutes=FSUB_EXPIRE)
+        if FSUB_EXPIRE > 0 else None
+    )
+
     missing = []
+
     if AUTH_CHANNELS:
         missing.extend(await is_subscribed(bot, user_id, expire_at))
+
     if AUTH_REQ_CHANNELS:
         missing.extend(await is_req_subscribed(bot, user_id))
+
     if not missing:
         return True
+
     bot_user = await bot.get_me()
     buttons = []
+
     for i in range(0, len(missing), 2):
         row = []
         for j in range(2):
             if i + j < len(missing):
                 title, link = missing[i + j]
-                row.append(InlineKeyboardButton(f"{i + j + 1}. {title}", url=link))
+                row.append(
+                    InlineKeyboardButton(
+                        f"{i + j + 1}. {title}",
+                        url=link
+                    )
+                )
         buttons.append(row)
-    buttons.append([InlineKeyboardButton("🔄 Try Again", url=f"https://telegram.me/{bot_user.username}?start=start")])
-    await message.reply(f"**🎭 {message.from_user.mention}, You haven’t joined my channel yet.\nPlease join using the buttons below.**", reply_markup=InlineKeyboardMarkup(buttons))
+
+    buttons.append([
+        InlineKeyboardButton(
+            "Try Again",
+            url=f"https://telegram.me/{bot_user.username}?start=start"
+        )
+    ])
+
+    await message.reply(
+        f"{message.from_user.mention}, you have not joined the required channels yet.\n"
+        f"Please join them using the buttons below.",
+        reply_markup=InlineKeyboardMarkup(buttons)
+    )
     return False
 
-@Client.on_message(filters.private & ~filters.user(ADMIN) & ~filters.bot & ~filters.service & ~filters.me, group=-10)
+
+@Client.on_message(
+    filters.private
+    & ~filters.user(ADMIN)
+    & ~filters.bot
+    & ~filters.service
+    & ~filters.me,
+    group=-10
+)
 async def global_fsub_checker(client: Client, message: Message):
     if not IS_FSUB:
         return
+
     if not await get_fsub(client, message):
         raise StopPropagation
