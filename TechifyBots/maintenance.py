@@ -12,7 +12,11 @@ async def get_maintenance() -> bool:
     return data.get("status", False) if data else False
 
 async def set_maintenance(status: bool):
-    await settings_col.update_one({"_id": "maintenance"},{"$set": {"status": status}},upsert=True)
+    await settings_col.update_one(
+        {"_id": "maintenance"},
+        {"$set": {"status": status}},
+        upsert=True
+    )
 
 @Client.on_message(filters.private & ~filters.user(ADMIN), group=-1)
 async def maintenance_blocker(_, m: Message):
@@ -22,22 +26,33 @@ async def maintenance_blocker(_, m: Message):
         await m.delete()
     except:
         pass
-    return await m.reply_text(f"<b>{message.from_user.mention},\n\nᴛʜɪꜱ ʙᴏᴛ ɪꜱ ᴄᴜʀʀᴇɴᴛʟʏ ᴜɴᴅᴇʀ ᴍᴀɪɴᴛᴇɴᴀɴᴄᴇ.\n\n<blockquote>ᴄᴏɴᴛᴀᴄᴛ ᴏᴡɴᴇʀ ꜰᴏʀ ᴍᴏʀᴇ ɪɴꜰᴏ.</blockquote></b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("👨‍💻 ᴏᴡɴᴇʀ 👨‍💻", user_id=int(ADMIN))]]))
+    return await m.reply_text(
+        f"<b>{m.from_user.mention},\n\n"
+        f"This bot is currently under maintenance.\n\n"
+        f"<blockquote>Contact owner for more information.</blockquote></b>",
+        reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton("Owner", user_id=int(ADMIN))]]
+        )
+    )
 
 @Client.on_message(filters.command("maintenance") & filters.user(ADMIN))
 async def maintenance_cmd(_, m: Message):
     args = m.text.split(maxsplit=1)
     if len(args) < 2:
-        return await m.reply("Usage: /maintenance [on/off]")
+        return await m.reply("Usage: /maintenance on | off")
+
     status = args[1].lower()
+
     if status == "on":
         if await get_maintenance():
-            return await m.reply("⚠️ Maintenance mode is already enabled.")
+            return await m.reply("Maintenance mode is already enabled.")
         await set_maintenance(True)
-        return await m.reply("✅ Maintenance mode **enabled**.")
+        return await m.reply("Maintenance mode enabled.")
+
     if status == "off":
         if not await get_maintenance():
-            return await m.reply("⚠️ Maintenance mode is already disabled.")
+            return await m.reply("Maintenance mode is already disabled.")
         await set_maintenance(False)
-        return await m.reply("❌ Maintenance mode **disabled**.")
-    await m.reply("Invalid status. Use 'on' or 'off'.")
+        return await m.reply("Maintenance mode disabled.")
+
+    await m.reply("Invalid option. Use 'on' or 'off'.")
