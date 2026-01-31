@@ -1,33 +1,35 @@
 class text(object):
-  START = """<b>{},
+    START = """<b>{},
 
-ɪ ᴄᴀɴ ɢᴇɴᴇʀᴀᴛᴇ ᴘʏʀᴏɢʀᴀᴍ ᴀɴᴅ ᴛᴇʟᴇᴛʜᴏɴ ꜱᴛʀɪɴɢ ꜱᴇꜱꜱɪᴏɴ
+I can generate Pyrogram and Telethon string session.
 
-nᴜꜱᴇ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ sᴛʀɪɴɢ sᴇssɪᴏɴ
+Use the button below to start generating string session.
 
-<blockquote>ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ : <a href='https://telegram.me/TechifyBots'>ʀᴀʜᴜʟ</a></blockquote></b>"""
+<blockquote>Maintained by : <a href='https://t.me/NeoCloud_Ofc'>NeoCloud Ofc</a></blockquote></b>"""
 
-  LOG = """👁️‍🗨️ 𝘜𝘚𝘌𝘙 𝘋𝘌𝘛𝘈𝘐𝘓𝘚
+    LOG = """👁️ USER DETAILS
 
-○ 𝘐𝘋 : <code>{}</code>
-○ 𝘋𝘊 : {}
-○ 𝘍𝘪𝘳𝘴𝘵 𝘕𝘢𝘮𝘦 : {}
-○ 𝘜𝘴𝘦𝘳𝘕𝘢𝘮𝘦 : {}
+• ID : <code>{}</code>
+• DC : {}
+• First Name : {}
+• Username : {}
 
-𝘉𝘺 = @{}"""
+By = @NeoCloud_Ofc"""
   
-  ABOUT = """<b>‣ ᴍʏ ɴᴀᴍᴇ : <a href='https://youtube.com/@techifybots'>sᴛʀɪɴɢ sᴇssɪᴏɴ ʙᴏᴛ</a>
-‣ ʟɪʙʀᴀʀʏ : <a href='https://docs.pyrogram.org/'>ᴘʏʀᴏɢʀᴀᴍ</a> 
-‣ ᴅᴀᴛᴀʙᴀsᴇ : <a href='https://www.mongodb.com/'>ᴍᴏɴɢᴏᴅʙ</a>
-‣ ʟᴀɴɢᴜᴀɢᴇ : <a href='https://www.python.org/download/releases/3.0/'>ᴘʏᴛʜᴏɴ 𝟹</a> 
-‣ ʙᴏᴛ sᴇʀᴠᴇʀ : <a href='https://www.koyeb.com/'>ᴋᴏʏᴇʙ</a>
-‣ ᴄʀᴇᴀᴛᴇᴅ ʙʏ : <a href='https://telegram.me/callownerbot'>ʀᴀʜᴜʟ</a></b>"""
+    ABOUT = """<b>
+• My Name : <a href='https://t.me/NeoCloud_Ofc'>String Session Bot</a>
+• Library : <a href='https://docs.pyrogram.org/'>Pyrogram</a>
+• Database : <a href='https://www.mongodb.com/'>MongoDB</a>
+• Language : <a href='https://www.python.org/'>Python 3</a>
+• Bot Server : VPS
+• Created By : <a href='https://t.me/NeoCloud_Ofc'>NeoCloud Ofc</a>
+</b>"""
 
-  
-  HELP = """<b>{},
+    HELP = """<b>{},
 
-ᴛʜɪꜱ ɪꜱ ʀᴇᴀʟʟʏ sɪᴍᴘʟᴇ 😂
+This is really simple 🙂
 
-ᴊᴜsᴛ ɢᴏ ʙᴀᴄᴋ ᴀɴᴅ ᴄʟɪᴄᴋ ᴏɴ ɢᴇɴᴇʀᴀᴛᴇ sᴛʀɪɴɢ sᴇssɪᴏɴ ʙᴜᴛᴛᴏɴ ᴀɴᴅ ᴛʜᴇɴ ꜰᴏʟʟᴏᴡ ᴛʜᴇ sᴛᴇᴘs
+Just go back and click on the "Generate String Session" button
+and then follow the given steps.
 
-<blockquote>ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ : <a href='https://telegram.me/TechifyBots'>ʀᴀʜᴜʟ</a></blockquote></b>"""
+<blockquote>Maintained by : <a href='https://t.me/NeoCloud_Ofc'>NeoCloud Ofc</a></blockquote></b>"""
