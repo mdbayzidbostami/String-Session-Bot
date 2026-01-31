@@ -1,73 +1,54 @@
-<h1 align="center">
- <b><a href="https://youtu.be/mbrXwwbkIrI" target="/blank">String Session Bot</a>
-</h1>
+# String Session Bot
 
-<p align="center">🩷 Thanks for Being Here 🩷</p>
+A professional Telegram bot designed to generate Pyrogram and Telethon string sessions securely and efficiently.
 
+## Features
 
+- **Session Generation**: Supports Pyrogram, Telethon, and Bot Session generation.
+- **Force Subscribe**: Ability to add multiple channels for mandatory subscription.
+- **Broadcast System**: Send messages to all authorized users.
+- **Maintenance Mode**: Toggle bot availability during updates.
+- **User Management**: Ban and unban users directly through commands.
+- **Easy Deployment**: Fully compatible with Koyeb, Heroku, and Railway.
+- **Support**: 24/7 developer assistance via the community channel.
 
-### 🥰 FEATURES
+## Environment Variables
 
-<details><summary>Tap On Me For Bot Features</summary>
+To deploy this bot, you need to configure the following environment variables:
 
-- Generate Pyrogram Session
-- Generate Pyrogram Bot Session
-- Generate Telethon Session
-- Generate Telethon Bot Session
-- Can Add Multiple Force Subscribe Channel
-- Can Broadcast Message To Users
-- Fully modified repo
-- Maintenance Mode
-- Ban & Unban Feature
-- Deploy To Koyeb + Heroku + Railway.
-- [Developer support](https://telegram.me/TechifySupport) 24x7.
-</details>
+| Variable | Description |
+|----------|-------------|
+| `API_ID` | Your Telegram API ID. Get it from [NeoCloud](https://t.me/NeoCloud_Ofc) |
+| `API_HASH` | Your Telegram API HASH. Get it from [NeoCloud](https://t.me/NeoCloud_Ofc) |
+| `BOT_TOKEN` | Your Bot Token from @BotFather. |
+| `DB_URI` | Your MongoDB Database URI. |
+| `ADMIN` | Your Telegram User ID (Numeric). |
+| `PICS` | Image links for the bot's start message. |
+| `LOG_CHANNEL` | Telegram ID of the channel for logs. |
+| `IS_FSUB` | Set to `True` or `False` to enable/disable Force Subscribe. |
+| `FSUB_EXPIRE` | Expiry time for the Force Subscribe link. |
+| `AUTH_CHANNELS` | Public/Private channel IDs for FSUB. |
+| `AUTH_REQ_CHANNELS` | Private Request channel IDs for FSUB. |
 
+## Bot Commands
 
-### 🔥 VARIABLES
+- `/start` - Start the bot.
+- `/gen` - Initiate the string session generation process.
+- `/stats` - View bot statistics and usage data.
+- `/cancel` - Cancel the ongoing generation process.
+- `/broadcast` - Send a message to all users (Admin only).
+- `/maintenance` - Toggle maintenance mode on or off.
+- `/ban` - Restrict a user from using the bot.
+- `/unban` - Remove restrictions from a banned user.
+- `/banned` - List all currently banned users.
 
-<details><summary>Tap On Me For Environment Variable</summary>
+## Support and Development
 
-- `API_ID` : Get From [Here](https://youtu.be/y5FwAobQ-Kc)
-- `API_HASH` : Get From [Here](https://youtu.be/y5FwAobQ-Kc)
-- `BOT_TOKEN` : Get From [BotFather](https://youtu.be/aJILCCXfNVM)
-- `DB_URI` : Mongodb [Database](https://youtu.be/j8LIuM7vv18)
-- `ADMIN` : Your Telegram ID.
-- `PICS` - Your bot start images (you can add multiple images)
-- `LOG_CHANNEL` : Log Channel ID.
-- `IS_FSUB` : True/False FSUB accordingly.
-- `FSUB_EXPIRE` : Your FSUB link expire time.
-- `AUTH_CHANNELS` : Your Public & Private FSUB channels IDs.
-- `AUTH_REQ_CHANNELS` : Your Private Request FSUB channels IDs.
+For updates, tutorials, and technical support, join our official channel:
+- **Telegram**: [NeoCloud Official](https://t.me/NeoCloud_Ofc)
+- **Developer Support**: [Contact Support](https://t.me/NeoCloud_Ofc)
 
-</details>
+## License and Terms
 
-### 😍 COMMANDS
-
-<b><details><summary>Tap On Me For Commands</summary>
-```
-start - Start The Bot
-gen - To start generation string session
-stats - To get bot stats
-cancel - To cancel the string generation process
-broadcast - To broadcast your message
-maintenance - Toggle maintenance mode.
-ban - to ban a user.
-unban - to unban a banned user.
-banned - to check banned users.
-```
-</b>
-</details>
-
-
-### 💞 CREDIT
-
-- [TechifyBots](https://github.com/TechifyBots)
-
-### 😇 [SUPPORT](https://techifybots.github.io/PayWeb)
-
-### 🥳 [DEVELOPER](https://instagram.com/ImRahulDhankhar)
-
-### 📌 NOTE
-
-𝘊𝘰𝘱𝘺𝘪𝘯𝘨 𝘰𝘳 𝘚𝘦𝘭𝘭𝘪𝘯𝘨 𝘵𝘩𝘪𝘴 𝘳𝘦𝘱𝘰 𝘪𝘴 𝘴𝘵𝘳𝘪𝘤𝘵𝘭𝘺 𝘱𝘳𝘰𝘩𝘪𝘣𝘪𝘵𝘦𝘥.</b>
+- This project is maintained by [NeoCloud](https://t.me/NeoCloud_Ofc).
+- Copying, modifying for resale, or selling this repository is strictly prohibited.
